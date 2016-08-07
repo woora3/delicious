@@ -25,7 +25,7 @@ import (
 )
 
 var bot *linebot.Client
-var richbot *RichMessageRequest
+//var richbot *RichMessageRequest
 var o *yelp.AuthOptions
 
 func main() {
@@ -95,8 +95,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					//_, err = bot.SendImage([]string{content.From}, results.Businesses[i].ImageURL, results.Businesses[i].ImageURL)
 					//SendImage(to []string, imageURL, previewURL string) (result *ResponseContent, err error)
 					bot.NewRichMessage(1040)
-					richbot.SetAction("thisActionName", "this is text", results.Businesses[i].URL)
-					richbot.SetListener("thisActionName", 0, 0, 1040, 1040) 
+					bot.SetAction("thisActionName", "this is text", results.Businesses[i].URL)
+					bot.SetListener("thisActionName", 0, 0, 1040, 1040) 
 					_, err = richbot.Send([]string{content.From}, results.Businesses[i].ImageURL, "this is altText")
 					_, err = bot.SendText([]string{content.From}, "店名: " + results.Businesses[i].Name + "\n電話: " + results.Businesses[i].Phone + "\n評比: " + strconv.FormatFloat(float64(results.Businesses[i].Rating), 'f', 1, 64))
 					_, err = bot.SendLocation([]string{content.From}, results.Businesses[i].Name, address, float64(results.Businesses[i].Location.Coordinate.Latitude), float64(results.Businesses[i].Location.Coordinate.Longitude))
