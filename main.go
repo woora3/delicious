@@ -97,8 +97,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					_, err = bot.SendText([]string{content.From}, "1 1 1")
 					_, err =  bot.NewRichMessage(1040)
 					_, err = richbot.SetAction("thisActionName", "this is text", results.Businesses[i].URL).
-					richbot.SetListener("thisActionName", 0, 0, 1040, 1040).
-					richbot.Send([]string{content.From}, results.Businesses[i].ImageURL, "this is altText")
+					SetListener("thisActionName", 0, 0, 1040, 1040).
+					Send([]string{content.From}, results.Businesses[i].ImageURL, "this is altText")
 					_, err = bot.SendText([]string{content.From}, "店名: " + results.Businesses[i].Name + "\n電話: " + results.Businesses[i].Phone + "\n評比: " + strconv.FormatFloat(float64(results.Businesses[i].Rating), 'f', 1, 64))
 					_, err = bot.SendLocation([]string{content.From}, results.Businesses[i].Name, address, float64(results.Businesses[i].Location.Coordinate.Latitude), float64(results.Businesses[i].Location.Coordinate.Longitude))
 				}
