@@ -39,10 +39,10 @@ func main() {
 
 	// check environment variables
 	o = &yelp.AuthOptions{
-		ConsumerKey:       os.Getenv("CONSUMER_KEY"),
-		ConsumerSecret:    os.Getenv("CONSUMER_SECRET"),
-		AccessToken:       os.Getenv("ACCESS_TOKEN"),
-		AccessTokenSecret: os.Getenv("ACCESS_TOKEN_SECRET"),
+		ConsumerKey:       os.Getenv("ConsumerKey"),
+		ConsumerSecret:    os.Getenv("ConsumerSecret"),
+		AccessToken:       os.Getenv("Token"),
+		AccessTokenSecret: os.Getenv("TokenSecret"),
 	}
 
 	if o.ConsumerKey == "" || o.ConsumerSecret == "" || o.AccessToken == "" || o.AccessTokenSecret == "" {
