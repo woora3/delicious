@@ -94,7 +94,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					address := strings.Join(results.Businesses[i].Location.DisplayAddress,",")
 					_, err = bot.SendImage([]string{content.From}, results.Businesses[i].ImageURL, results.Businesses[i].ImageURL)
 					//SendImage(to []string, imageURL, previewURL string) (result *ResponseContent, err error)
-					bot.NewRichMessage(1040)
+					//bot.NewRichMessage(1040)
 					richbot.SetAction("thisActionName", "this is text", results.Businesses[i].URL)
 					richbot.SetListener("thisActionName", 0, 0, 1040, 1040) 
 					_, err = richbot.Send([]string{content.From}, results.Businesses[i].ImageURL, "this is altText")
