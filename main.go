@@ -95,7 +95,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					_, err = bot.SendImage([]string{content.From}, results.Businesses[i].ImageURL, results.Businesses[i].ImageURL)
 					//SendImage(to []string, imageURL, previewURL string) (result *ResponseContent, err error)
 					_, err = bot.SendText([]string{content.From}, "1 1 1")
-					bot.NewRichMessage(1040).
+					_, err =  bot.NewRichMessage(1040).
 					SetAction("thisActionName", "this is text", results.Businesses[i].URL).
 					SetListener("thisActionName", 0, 0, 1040, 1040).
 					Send([]string{content.From}, results.Businesses[i].ImageURL, "this is altText")
