@@ -89,21 +89,22 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				if err != nil {
 					log.Println(err)
 				}
-
+				
 				for i := 0; i < 3; i++ {
+					imgurl := results.Businesses[i].ImageURL
 					address := strings.Join(results.Businesses[i].Location.DisplayAddress,",")
 					_, err = bot.SendImage([]string{content.From}, results.Businesses[i].ImageURL, results.Businesses[i].ImageURL)
 					//SendImage(to []string, imageURL, previewURL string) (result *ResponseContent, err error)
 					_, err = bot.SendText([]string{content.From}, results.Businesses[i].URL)
 					bot.SendText([]string{content.From}, results.Businesses[i].ImageURL)
-					if results.Businesses[i].ImageURL[-3] == 'j'{
-						results.Businesses[i].ImageURL[len(results.Businesses[i].ImageURL)-3] = 'p'
-						results.Businesses[i].ImageURL[len(results.Businesses[i].ImageURL)-2] = 'n'
+					if imgurl[len(imgurl) - 3] == 'j'{
+						imgurl[len(imgurl) - 3] = 'p'
+						imgurl[len(imgurl) - 2] = 'n'
 					}
 					bot.NewRichMessage(1040).
 						SetAction("thisActionName", "this is text", results.Businesses[i].URL).
 						SetListener("thisActionName", 0, 0, 1040, 1040).
-						Send([]string{content.From}, results.Businesses[i].ImageURL + ".png", "imagURL!!!!!!")
+						Send([]string{content.From}, imgurl, "imagURL!!!!!!")
 					_, err = bot.SendText([]string{content.From}, "店名: " + results.Businesses[i].Name + "\n電話: " + results.Businesses[i].Phone + "\n評比: " + strconv.FormatFloat(float64(results.Businesses[i].Rating), 'f', 1, 64))
 					_, err = bot.SendLocation([]string{content.From}, results.Businesses[i].Name, address, float64(results.Businesses[i].Location.Coordinate.Latitude), float64(results.Businesses[i].Location.Coordinate.Longitude))
 				}
