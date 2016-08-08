@@ -99,7 +99,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					*/
 					address := strings.Join(results.Businesses[i].Location.DisplayAddress,",")
 					_, err = bot.SendImage([]string{content.From}, imgurl, imgurl)
-					_, err = bot.SendText([]string{content.From}, imgurl)
+					//_, err = bot.SendText([]string{content.From}, imgurl)
 					
 					imgurl = "http://i.imgur.com/Q1Hj13v.png"
 					bot.NewRichMessage(240).
