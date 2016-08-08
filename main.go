@@ -101,7 +101,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					_, err = bot.SendImage([]string{content.From}, imgurl, imgurl)
 					//_, err = bot.SendText([]string{content.From}, imgurl)
 					
-					imgurl = "http://a1.att.hudong.com/47/32/01300001128119146475327102551_s.jpg"
+					imgurl = "http://i.imgur.com/gHWWoBb.jpg"
 					bot.NewRichMessage(300).
 						SetAction("food", "food", results.Businesses[i].URL).
 						SetListener("food", 0, 0, 300, 300).
