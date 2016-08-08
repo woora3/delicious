@@ -92,16 +92,19 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				
 				for i := 0; i < 3; i++ {
 					imgurl := results.Businesses[i].ImageURL
+					/*
 					if strings.HasPrefix(imgurl, "https"){
 						imgurl = strings.Replace(imgurl, "https", "http", 1)
 					}
+					*/
 					address := strings.Join(results.Businesses[i].Location.DisplayAddress,",")
 					_, err = bot.SendImage([]string{content.From}, imgurl, imgurl)
 					_, err = bot.SendText([]string{content.From}, imgurl)
-					bot.SendText([]string{content.From}, imgurl)
-					bot.NewRichMessage(1040).
+					
+					imgurl = "http://imgur.com/Q1Hj13v"
+					bot.NewRichMessage(240).
 						SetAction("food", "food", results.Businesses[i].URL).
-						SetListener("food", 0, 0, 1040, 1040).
+						SetListener("food", 0, 0, 240, 240).
 						Send([]string{content.From}, imgurl, "imagURLtest")
 					_, err = bot.SendText([]string{content.From}, "店名: " + results.Businesses[i].Name + "\n電話: " + results.Businesses[i].Phone + "\n評比: " + strconv.FormatFloat(float64(results.Businesses[i].Rating), 'f', 1, 64))
 					_, err = bot.SendLocation([]string{content.From}, results.Businesses[i].Name, address, float64(results.Businesses[i].Location.Coordinate.Latitude), float64(results.Businesses[i].Location.Coordinate.Longitude))
