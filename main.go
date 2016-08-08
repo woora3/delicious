@@ -93,7 +93,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				for i := 0; i < 3; i++ {
 					imgurl := results.Businesses[i].ImageURL
 					if strings.Contains(imgurl, ".jpg") {
-						strings.Replace(imgurl, ".jpg", ".png", 1)
+						imgurl = strings.Replace(imgurl, ".jpg", ".png", 1)
 					}
 					address := strings.Join(results.Businesses[i].Location.DisplayAddress,",")
 					_, err = bot.SendImage([]string{content.From}, imgurl, results.Businesses[i].ImageURL)
