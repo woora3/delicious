@@ -93,10 +93,10 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				for i := 0; i < 3; i++ {
 					imgurl := results.Businesses[i].ImageURL
 					if strings.HasSuffix(imgurl, ".jpg") {
-						strings.Replace(imgurl, ".jpg", ".png", 2)
+						strings.Replace(imgurl, ".jpg", ".png", 1)
 					}
 					address := strings.Join(results.Businesses[i].Location.DisplayAddress,",")
-					_, err = bot.SendImage([]string{content.From}, results.Businesses[i].ImageURL, results.Businesses[i].ImageURL)
+					_, err = bot.SendImage([]string{content.From}, imgurl, results.Businesses[i].ImageURL)
 					//SendImage(to []string, imageURL, previewURL string) (result *ResponseContent, err error)
 					_, err = bot.SendText([]string{content.From}, results.Businesses[i].URL)
 					bot.SendText([]string{content.From}, results.Businesses[i].ImageURL)
