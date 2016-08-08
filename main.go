@@ -99,7 +99,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					bot.NewRichMessage(100).
 						SetAction("thisActionName", "this is text", results.Businesses[i].URL).
 						SetListener("thisActionName", 0, 0, 100, 100).
-						Send([]string{content.From}, results.Businesses[i].ImageURL, "imagURL!!!!!!")
+						Send([]string{content.From}, "http://i.imgur.com/wVr83ep.png", "imagURL!!!!!!")
 					_, err = bot.SendText([]string{content.From}, "店名: " + results.Businesses[i].Name + "\n電話: " + results.Businesses[i].Phone + "\n評比: " + strconv.FormatFloat(float64(results.Businesses[i].Rating), 'f', 1, 64))
 					_, err = bot.SendLocation([]string{content.From}, results.Businesses[i].Name, address, float64(results.Businesses[i].Location.Coordinate.Latitude), float64(results.Businesses[i].Location.Coordinate.Longitude))
 				}
