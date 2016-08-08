@@ -97,8 +97,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					_, err = bot.SendText([]string{content.From}, results.Businesses[i].URL)
 					bot.SendText([]string{content.From}, results.Businesses[i].ImageURL)
 					if results.Businesses[i].ImageURL[-3] == 'j'{
-						results.Businesses[i].ImageURL[-3] = 'p'
-						results.Businesses[i].ImageURL[-2] = 'n'
+						results.Businesses[i].ImageURL[len(results.Businesses[i].ImageURL)-3] = 'p'
+						results.Businesses[i].ImageURL[len(results.Businesses[i].ImageURL)-2] = 'n'
 					}
 					bot.NewRichMessage(1040).
 						SetAction("thisActionName", "this is text", results.Businesses[i].URL).
