@@ -92,7 +92,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				
 				for i := 0; i < 3; i++ {
 					imgurl := results.Businesses[i].ImageURL
-					if strings.HasSuffix(imgurl, ".jpg") {
+					if strings.Contains(imgurl, ".jpg") {
 						strings.Replace(imgurl, ".jpg", ".png", 1)
 					}
 					address := strings.Join(results.Businesses[i].Location.DisplayAddress,",")
