@@ -97,9 +97,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					//SendImage(to []string, imageURL, previewURL string) (result *ResponseContent, err error)
 					_, err = bot.SendText([]string{content.From}, results.Businesses[i].URL)
 					bot.SendText([]string{content.From}, results.Businesses[i].ImageURL)
-					if imgurl[len(imgurl) - 3] == 'j'{
-						imgurl[len(imgurl) - 3] = 'p'
-						imgurl[len(imgurl) - 2] = 'n'
+					if strings.HasSuffix(imgurl, ".jpg") {
+						strings.Replace(imgurl, ".jpg", ".png", 2)
 					}
 					bot.NewRichMessage(1040).
 						SetAction("thisActionName", "this is text", results.Businesses[i].URL).
