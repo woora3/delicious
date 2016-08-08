@@ -101,10 +101,10 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					_, err = bot.SendImage([]string{content.From}, imgurl, imgurl)
 					//_, err = bot.SendText([]string{content.From}, imgurl)
 					
-					imgurl = "http://i.imgur.com/Q1Hj13v.png"
-					bot.NewRichMessage(240).
+					imgurl = "http://a1.att.hudong.com/47/32/01300001128119146475327102551_s.jpg"
+					bot.NewRichMessage(300).
 						SetAction("food", "food", results.Businesses[i].URL).
-						SetListener("food", 0, 0, 240, 240).
+						SetListener("food", 0, 0, 300, 300).
 						Send([]string{content.From}, imgurl, "imagURLtest")
 					_, err = bot.SendText([]string{content.From}, "店名: " + results.Businesses[i].Name + "\n電話: " + results.Businesses[i].Phone + "\n評比: " + strconv.FormatFloat(float64(results.Businesses[i].Rating), 'f', 1, 64))
 					_, err = bot.SendLocation([]string{content.From}, results.Businesses[i].Name, address, float64(results.Businesses[i].Location.Coordinate.Latitude), float64(results.Businesses[i].Location.Coordinate.Longitude))
