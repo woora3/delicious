@@ -19,7 +19,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
-
+	"sort"
 	"github.com/line/line-bot-sdk-go/linebot"
 	"github.com/JustinBeckwith/go-yelp/yelp"
 )
@@ -77,7 +77,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				log.Println("New friend add event.")
 			}
 		}
-
+		
 		if content != nil && content.IsMessage && content.ContentType == linebot.ContentTypeText {
 			text, err := content.TextContent()
 			c := strings.Split(text.Text, " ")
@@ -90,6 +90,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					log.Println(err)
 				}
 				
+				
+				
 				for i := 0; i < 3; i++ {
 					imgurl := results.Businesses[i].ImageURL
 					/*
@@ -99,7 +101,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					*/
 					address := strings.Join(results.Businesses[i].Location.DisplayAddress,",")
 					_, err = bot.SendImage([]string{content.From}, imgurl, imgurl)
-					//_, err = bot.SendText([]string{content.From}, imgurl)
+					_, err = bot.SendText([]string{content.From}, results.Businesses[i].Rating)
 					
 					imgurl = "http://i.imgur.com/lVM92n5.jpg"
 					bot.NewRichMessage(1040).
