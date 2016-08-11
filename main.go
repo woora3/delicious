@@ -90,7 +90,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					log.Println(err)
 				}
 				
-				
+				sort.Ints(results.Businesses[i].Rating)
 				
 				for i := 0; i < 3; i++ {
 					imgurl := results.Businesses[i].ImageURL
@@ -101,7 +101,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					*/
 					address := strings.Join(results.Businesses[i].Location.DisplayAddress,",")
 					_, err = bot.SendImage([]string{content.From}, imgurl, imgurl)
-					_, err = bot.SendText([]string{content.From}, float64(results.Businesses[i].Rating))
+					_, err = bot.SendText([]string{content.From}, results.Businesses[i].Rating)
 					
 					imgurl = "http://i.imgur.com/lVM92n5.jpg"
 					bot.NewRichMessage(1040).
