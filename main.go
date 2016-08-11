@@ -19,7 +19,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
-	"sort"
+	//"sort"
 	"github.com/line/line-bot-sdk-go/linebot"
 	"github.com/JustinBeckwith/go-yelp/yelp"
 )
@@ -101,7 +101,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					*/
 					address := strings.Join(results.Businesses[i].Location.DisplayAddress,",")
 					_, err = bot.SendImage([]string{content.From}, imgurl, imgurl)
-					_, err = bot.SendText([]string{content.From}, results.Businesses[i].Rating)
+					_, err = bot.SendText([]string{content.From}, float64(results.Businesses[i].Rating))
 					
 					imgurl = "http://i.imgur.com/lVM92n5.jpg"
 					bot.NewRichMessage(1040).
