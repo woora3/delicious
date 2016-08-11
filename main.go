@@ -19,7 +19,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
-	//"sort"
+	"sort"
 	"github.com/line/line-bot-sdk-go/linebot"
 	"github.com/JustinBeckwith/go-yelp/yelp"
 )
@@ -90,7 +90,26 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					log.Println(err)
 				}
 				
-				sort.Ints(results.Businesses[i].Rating)
+				type ByRating []results.Businesses
+
+				func (a ByRating) Len() int           { return len(a) }
+				func (a ByRating) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+				func (a ByRating) Less(i, j int) bool { return a[i].Rating < a[j].Rating }
+				
+				func main() {
+					people := []Person{
+						{"Bob", 31},
+						{"John", 42},
+						{"Michael", 17},
+						{"Jenny", 26},
+					}
+				
+					fmt.Println(people)
+					sort.Sort(ByRating(people))
+					fmt.Println(people)
+				
+				}
+				
 				
 				for i := 0; i < 3; i++ {
 					imgurl := results.Businesses[i].ImageURL
@@ -101,7 +120,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					*/
 					address := strings.Join(results.Businesses[i].Location.DisplayAddress,",")
 					_, err = bot.SendImage([]string{content.From}, imgurl, imgurl)
-					_, err = bot.SendText([]string{content.From}, results.Businesses[i].Rating)
+					//_, err = bot.SendText([]string{content.From}, "123test")
 					
 					imgurl = "http://i.imgur.com/lVM92n5.jpg"
 					bot.NewRichMessage(1040).
