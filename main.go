@@ -83,6 +83,25 @@ func (u *UrlShortener) short(urlOrig string, shortener int) *UrlShortener {
 //surl
 
 func main() {
+
+        //要存入cookie的map
+your := map[string]string{}
+your["isuser"] = "isuser"
+your["username"] = "username"
+your["password"] = "password"
+//将map转成json  转换后的是[]byte，需要string(your_byte)后就是json了
+your_byte, _ := json.Marshal(your)
+//将json base64一下
+b64 := base64.NewEncoding("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/")
+your_string := b64.EncodeToString(your_byte)
+fmt.Println(your_string)
+//第二种base64的方式
+your_string = base64.StdEncoding.EncodeToString(your_byte)
+fmt.Println(your_string)
+//存储cookie
+this.Ctx.SetCookie("your", your_string)
+
+
 	strID := os.Getenv("ChannelID")
 	numID, err := strconv.ParseInt(strID, 10, 64)
 	if err != nil {
