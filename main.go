@@ -19,7 +19,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
-	"sort"
+	//"sort"
 	"github.com/line/line-bot-sdk-go/linebot"
 	"github.com/JustinBeckwith/go-yelp/yelp"
 )
@@ -113,6 +113,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				
 				for i := 0; i < 3; i++ {
 					imgurl := results.Businesses[i].ImageURL
+					weburl := results.Businesses[i].URL
 					/*
 					if strings.HasPrefix(imgurl, "https"){
 						imgurl = strings.Replace(imgurl, "https", "http", 1)
@@ -120,11 +121,11 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					*/
 					address := strings.Join(results.Businesses[i].Location.DisplayAddress,",")
 					_, err = bot.SendImage([]string{content.From}, imgurl, imgurl)
-					//_, err = bot.SendText([]string{content.From}, "123test")
+					_, err = bot.SendText([]string{content.From}, "123test")
 					
 					imgurl = "http://i.imgur.com/lVM92n5.jpg"
 					bot.NewRichMessage(1040).
-						SetAction("food", "food", results.Businesses[i].URL).
+						SetAction("food", "food", weburl).
 						SetListener("food", 0, 0, 1040, 1040).
 						Send([]string{content.From}, imgurl, "imagURLtest")
 					_, err = bot.SendText([]string{content.From}, "店名: " + results.Businesses[i].Name + "\n電話: " + results.Businesses[i].Phone + "\n評比: " + strconv.FormatFloat(float64(results.Businesses[i].Rating), 'f', 1, 64))
