@@ -179,7 +179,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					address := strings.Join(results.Businesses[i].Location.DisplayAddress,",")
 					_, err = bot.SendImage([]string{content.From}, imgurl, imgurl)
 					_, err = bot.SendText([]string{content.From}, "縮網址: " + urlOrig.ShortUrl)
-					
+					bot.SendText([]string{content.From}, "你的位置: " + content.Location.Address)
+
 					imgurl = "http://i.imgur.com/lVM92n5.jpg"
 					bot.NewRichMessage(1040).
 						SetAction("food", "food", weburl).
