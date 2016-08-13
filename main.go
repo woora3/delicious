@@ -168,6 +168,9 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				for i := 0; i < 3; i++ {
 					imgurl := results.Businesses[i].ImageURL
 					weburl := results.Businesses[i].URL
+					
+					urlOrig := UrlShortener{}
+					urlOrig.short(weburl, IS_GD)
 					/*
 					if strings.HasPrefix(imgurl, "https"){
 						imgurl = strings.Replace(imgurl, "https", "http", 1)
@@ -175,7 +178,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					*/
 					address := strings.Join(results.Businesses[i].Location.DisplayAddress,",")
 					_, err = bot.SendImage([]string{content.From}, imgurl, imgurl)
-					_, err = bot.SendText([]string{content.From}, "123test")
+					_, err = bot.SendText([]string{content.From}, "縮網址: " + urlOrig.ShortUrl)
 					
 					imgurl = "http://i.imgur.com/lVM92n5.jpg"
 					bot.NewRichMessage(1040).
