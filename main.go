@@ -89,7 +89,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				if err != nil {
 					log.Println(err)
 				}
-				
+				/*
 				type ByRating []results.Businesses
 
 				func (a ByRating) Len() int           { return len(a) }
@@ -109,7 +109,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					fmt.Println(people)
 				
 				}
-				
+				*/
 				
 				for i := 0; i < 3; i++ {
 					imgurl := results.Businesses[i].ImageURL
